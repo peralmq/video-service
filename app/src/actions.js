@@ -1,9 +1,11 @@
 import 'whatwg-fetch'
-export const REQUEST_CREATE_POST = 'REQUEST_CREATE_POST'
+export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST'
+export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS'
+export const CREATE_POST_FAIL = 'CREATE_POST_FAIL'
 
 export function createPost({title, description, video}) {
   return (dispatch) => {
-    dispatch({type: REQUEST_CREATE_POST})
+    dispatch({type: CREATE_POST_REQUEST})
     fetch('/api/posts/', {
       method: 'POST',
       headers: {
@@ -14,6 +16,17 @@ export function createPost({title, description, video}) {
         description,
         video,
       })
+    })
+    .then(response => {
+      if (response.status !== 201) {
+        throw Error(`Bad status code: ${response.status}`)
+      }
+      dispatch({type: CREATE_POST_SUCCESS})
+      return response.json()
+    })
+    .catch((error) => {
+        console.log(error);
+        dispatch({type: CREATE_POST_FAIL, error})
     })
   }
 }

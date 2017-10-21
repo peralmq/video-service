@@ -1,5 +1,24 @@
 import {combineReducers} from 'redux'
 
+import {
+  CREATE_POST_REQUEST,
+  CREATE_POST_SUCCESS,
+  CREATE_POST_FAIL,
+} from './actions'
+
+function createPost(state={isLoading: false, didComplete: false, error: null}, action) {
+  switch (action.type) {
+    case CREATE_POST_REQUEST:
+      return {...state, isLoading: false, didComplete: false, error: null}
+    case CREATE_POST_SUCCESS:
+      return {...state, isLoading: false, didComplete: true}
+    case CREATE_POST_FAIL:
+      return {...state, isLoading: false, didComplete: true, error: action.error}
+    default:
+      return state
+  }
+}
+
 function visiblePosts(state=[], action) {
   switch (action) {
     default:
@@ -8,6 +27,7 @@ function visiblePosts(state=[], action) {
 }
 
 const reducers = combineReducers({
+  createPost,
   visiblePosts
 })
 

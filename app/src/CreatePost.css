@@ -4,6 +4,10 @@
   width: 25.1428rem;
 }
 
+.CreatePost-isLoading {
+  opacity: 0.5;
+}
+
 .CreatePost-header {
   font-size: 1.7143rem;
   margin: 0;
@@ -46,4 +50,8 @@
   float: right;
   font-size: 1.1rem;
   padding: 0.4rem;
+}
+
+.CreatePost-error {
+  color: red;
 }

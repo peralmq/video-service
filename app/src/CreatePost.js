@@ -1,6 +1,6 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Link} from 'react-router-dom'
+import {Redirect} from 'react-router-dom'
 
 import {createPost} from './actions'
 
@@ -47,8 +47,13 @@ class CreatePost extends Component {
   }
 
   render() {
+    const {error, isLoading, didComplete} = this.props
+    if (didComplete) {
+      return <Redirect to="/" />
+    }
+
     return (
-      <div className="CreatePost">
+      <div className={'CreatePost' + (isLoading ? ' CreatePost-isLoading' : '')}>
         <h1 className="CreatePost-header">Create a new post</h1>
         <form className="CreatePost-table" onSubmit={this.handleSubmit}>
           <div className="CreatePost-row">
@@ -86,9 +91,18 @@ class CreatePost extends Component {
           </div>
           <input className="CreatePost-button" type="submit" value="Create" />
         </form>
+        {error && (
+          <div className="CretePost-error">
+            {JSON.stringify(error)}
+          </div>
+        )}
       </div>
     )
   }
+}
+
+function mapStateToProps(state) {
+  return state.createPost
 }
 
 function mapDispatchToProps(dispatch) {
@@ -97,4 +111,4 @@ function mapDispatchToProps(dispatch) {
   }
 }
 
-export default connect(null, mapDispatchToProps)(CreatePost)
+export default connect(mapStateToProps, mapDispatchToProps)(CreatePost)
