@@ -21,11 +21,12 @@
 }
 
 .TextBodyReadMore-text {
-  display: block;
-  color: #26A69A;
-  font-size: 1.2857rem;
-  text-align: center;
-  position: relative;
   background: white;
+  color: #26A69A;
+  display: block;
+  font-size: 1.2857rem;
   opacity: 0.9;
+  position: relative;
+  text-align: center;
+  vertical-align: bottom;
 }
