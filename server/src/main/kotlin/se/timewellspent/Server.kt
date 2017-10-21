@@ -39,8 +39,6 @@ class Controllers {
     }
 
     fun showTrack(req: Request, res: Response): Any {
-        val s = "He lo"
-s.mapIndexed { i, c -> if (i != 0 && s[i -  1] == ' ') { c.toUpperCase() } else { c } }
         val id = req.params("id")
         return storage[id]?.let { track ->
             res.status(200)
@@ -51,10 +49,11 @@ s.mapIndexed { i, c -> if (i != 0 && s[i -  1] == ' ') { c.toUpperCase() } else 
 
 class Router {
     init {
+        Spark.staticFiles.location("/public")
         val controllers = Controllers()
-        Spark.get("/", controllers::root)
-        Spark.post("/tracks/", controllers::createTrack)
-        Spark.get("/tracks/:id", controllers::showTrack)
+        Spark.get("/api/", controllers::root)
+        Spark.post("/api/tracks/", controllers::createTrack)
+        Spark.get("/api/tracks/:id", controllers::showTrack)
     }
 }
 
