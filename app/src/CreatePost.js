@@ -46,7 +46,7 @@ class CreatePost extends Component {
       })
     }
 
-    reader.readAsText(file)
+    reader.readAsDataURL(file)
   }
 
   render() {

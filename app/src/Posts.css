@@ -2,3 +2,12 @@
   margin: 0 auto;
   width: 25.1428rem;
 }
+
+.Posts-spinner {
+  background: white;
+  width: 100%;
+}
+
+.Posts-error {
+  color: red;
+}

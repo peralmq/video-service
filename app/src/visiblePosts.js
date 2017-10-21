@@ -1,16 +1,23 @@
 const videos = [
   {
-    imgUrl: 'https://i.ytimg.com/vi/LPjblqE3xHk/hqdefault.jpg',
-    videoUrl: 'https://www.videvo.net/videvo_files/converted/2014_12/videos/Raindrops_Videvo.mp485639.mp4'
+      data: 'https://cdn.filestackcontent.com/3UBzjCZKQXKYlPJQsarL',
+      file: {
+        type: 'video/quicktime'
+      }
   },
   {
-    imgUrl: 'https://i.ytimg.com/vi/7LjRwpLmzS4/mqdefault.jpg',
-    videoUrl: 'https://www.videvo.net/videvo_files/converted/2014_12/videos/Raindrops_Videvo.mp485639.mp4'
+      data: 'https://cdn.filestackcontent.com/3UBzjCZKQXKYlPJQsarL',
+      file: {
+        type: 'video/quicktime'
+      }
   },
   {
-    imgUrl: 'https://i.ytimg.com/vi/liSseCH6_p8/mqdefault.jpg',
-    videoUrl: 'https://www.videvo.net/videvo_files/converted/2014_12/videos/Raindrops_Videvo.mp485639.mp4'
+      data: 'https://cdn.filestackcontent.com/3UBzjCZKQXKYlPJQsarL',
+      file: {
+        type: 'video/quicktime'
+      }
   },
+
 ]
 
 export default [0, 1, 2].map(i => {

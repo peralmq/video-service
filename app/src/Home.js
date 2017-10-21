@@ -2,13 +2,12 @@ import React from 'react'
 
 import NavigationBar from './NavigationBar'
 import Posts from './Posts'
-import visiblePosts from './visiblePosts.js'
 
-function Home() {
+function Home(props) {
   return (
     <div className="Home">
       <NavigationBar />
-      <Posts visiblePosts={visiblePosts} />
+      <Posts />
     </div>
   )
 }

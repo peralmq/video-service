@@ -5,6 +5,9 @@ import {
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_FAIL,
+  FETCH_POSTS_REQUEST,
+  FETCH_POSTS_SUCCESS,
+  FETCH_POSTS_FAIL
 } from './actions'
 
 const initialCreatePostState = {isLoading: false, didComplete: false, error: null}
@@ -23,6 +26,21 @@ function createPost(state=initialCreatePostState, action) {
   }
 }
 
+function posts(state={isLoading: false, error: null, data: []}, action) {
+  switch (action.type) {
+    case FETCH_POSTS_REQUEST:
+      return {...state, isLoading: true, error: null}
+    case FETCH_POSTS_SUCCESS:
+      return {...state, isLoading: false, error: null, data: action.data}
+    case FETCH_POSTS_FAIL:
+      return {...state, isLoading: false, error: action.error}
+    case CREATE_POST_SUCCESS:
+      return {...state, data: action.data.concat(state.data)}
+    default:
+      return state
+  }
+}
+
 function visiblePosts(state=[], action) {
   switch (action) {
     default:
@@ -32,6 +50,7 @@ function visiblePosts(state=[], action) {
 
 const reducers = combineReducers({
   createPost,
+  posts,
   visiblePosts
 })
 
