@@ -1,0 +1,31 @@
+.TextBody {
+  position: relative;
+}
+.TextBody-text {
+  text-align: left;
+  max-height: 10rem;
+  overflow: hidden;
+}
+
+.TextBodyReadMore {
+  height: 2rem;
+  width: 100%;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: -webkit-linear-gradient(transparent, white);
+  background: -o-linear-gradient(transparent, white);
+  background: -moz-linear-gradient(transparent, white);
+  background: linear-gradient(transparent, white);
+}
+
+.TextBodyReadMore-text {
+  display: block;
+  color: #26A69A;
+  font-size: 1.2857rem;
+  text-align: center;
+  position: relative;
+  background: white;
+  opacity: 0.9;
+}

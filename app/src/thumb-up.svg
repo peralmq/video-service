@@ -1,0 +1,17 @@
+<svg width="22px" height="20px" viewBox="0 0 22 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 46.2 (44496) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Artboard" transform="translate(-71.000000, -299.000000)">
+            <g id="Card" transform="translate(12.000000, 56.000000)">
+                <g id="Group-4" transform="translate(20.000000, 241.000000)">
+                    <g id="ic_thumb_up_black_24px" transform="translate(39.000000, 1.000000)">
+                        <polygon id="Shape" points="7 0 31 0 31 24 7 24"></polygon>
+                        <path d="M0,21 L4,21 L4,9 L0,9 L0,21 Z M22,10 C22,8.9 21.1,8 20,8 L13.69,8 L14.64,3.43 L14.67,3.11 C14.67,2.7 14.5,2.32 14.23,2.05 L13.17,1 L6.59,7.59 C6.22,7.95 6,8.45 6,9 L6,19 C6,20.1 6.9,21 8,21 L17,21 C17.83,21 18.54,20.5 18.84,19.78 L21.86,12.73 C21.95,12.5 22,12.26 22,12 L22,10.09 L21.99,10.08 L22,10 Z" id="Shape" fill="#26A69A" fill-rule="nonzero"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

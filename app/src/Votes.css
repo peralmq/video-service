@@ -1,0 +1,28 @@
+.Votes {
+  color: #26A69A;
+  font-size: 1.2857rem;
+  height: 2.2857rem;
+}
+.Votes-up {
+  float: left;
+  margin-left: 0.5714rem;
+}
+.Votes-up-number {
+  vertical-align: bottom;
+  margin-right: 0.2rem;
+}
+.Votes-up-thumb {
+  margin-left: 0.5714rem;
+}
+.Votes-thumb {
+  height: 1.5714rem;
+  vertical-align: middle;
+  width: 1.4285rem;
+}
+.Votes-down-number {
+  margin-left: 0.2rem;
+}
+.Votes-down {
+  float: right;
+  margin-right: 0.5714rem;
+}
