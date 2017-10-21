@@ -3,3 +3,8 @@ body {
   padding: 0;
   font-family: sans-serif;
 }
+
+html {
+  /* Responsive font from 14px to 16px between 320px and 375px viewport */
+  font-size: calc(1.81818vw + 7.181818px);
+}
