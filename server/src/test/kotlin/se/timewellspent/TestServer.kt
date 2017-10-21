@@ -19,45 +19,58 @@ class TestServer {
         }
     }
 
+    val BASE_URL = "http://localhost:4567/api"
+
     @Test
     fun testRoot() {
-        val actual = Fuel.get("http://localhost:4567/").responseString()
+        val actual = Fuel.get("$BASE_URL/").responseString()
         assertEquals(200, actual.second.statusCode)
         assertEquals("Hello from Spark Kotlin!", actual.third.get())
     }
 
-    private val createTrackBody = json {
-        obj("url" to "https://example.com")
+    private val createPostBody = json {
+        obj(
+                "title" to "A title",
+                "description" to "A description",
+                "video" to obj(
+                        "data" to "Some data",
+                        "file" to obj(
+                                "name" to "A file name",
+                                "type" to "A file type"
+                        )
+                )
+            )
     }.toJsonString()
 
     @Test
     fun testCreateTrack() {
-        val expected = json {
-            obj(
-                    "id" to "1",
-                    "url" to "https://example.com"
-
-            )
-        }.toJsonString()
-        val actual = Fuel.post("http://localhost:4567/tracks/").body(createTrackBody).responseString()
-        assertEquals(201, actual.second.statusCode)
-        assertEquals(expected, actual.third.get())
+        val (_, status, responseBody) = Fuel.post("$BASE_URL/posts/").body(createPostBody).responseString()
+        assertEquals(201, status.statusCode)
+        val id = (Parser().parse(responseBody.get().byteInputStream()) as JsonObject).string("id")
+        assertEquals("1", id)
     }
 
     @Test
     fun testGetTrack() {
-        val (_, _, responseBody) = Fuel.post("http://localhost:4567/tracks/").body(createTrackBody).responseString()
+        val (_, _, responseBody) = Fuel.post("$BASE_URL/posts/").body(createPostBody).responseString()
         val id = (Parser().parse(responseBody.get().byteInputStream()) as JsonObject).string("id")
         val expected = json {
             obj(
                     "id" to id,
-                    "url" to "https://example.com"
-
+                    "title" to "A title",
+                    "description" to "A description",
+                    "video" to obj(
+                            "data" to "Some data",
+                            "file" to obj(
+                                    "name" to "A file name",
+                                    "type" to "A file type"
+                            )
+                    )
             )
         }.toJsonString()
-        val actual = Fuel.get("http://localhost:4567/tracks/" + id).body(createTrackBody).responseString()
-        assertEquals(200, actual.second.statusCode)
-        assertEquals(expected, actual.third.get())
+        val (_, status, responseBody2) = Fuel.get("$BASE_URL/posts/" + id).responseString()
+        assertEquals(200, status.statusCode)
+        assertEquals(expected, responseBody2.get())
     }
 }
 
