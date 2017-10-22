@@ -1,0 +1,49 @@
+.CreatePost {
+  background-color: white;
+  margin: 0 auto;
+  width: 25.1428rem;
+}
+
+.CreatePost-header {
+  font-size: 1.7143rem;
+  margin: 0;
+  padding-top: 1rem;
+  text-align: center;
+}
+
+.CreatePost-table {
+  margin: 0.8rem auto;
+}
+
+.CreatePost-row {
+  display: flex;
+  flex: 3;
+}
+
+.CreatePost-label,
+.CreatePost-data,
+.CreatePost-button {
+  margin: 0.4rem;
+}
+
+.CreatePost-label {
+  flex: 1;
+  text-align: right;
+}
+
+.CreatePost-data {
+  background-color: #f1f1f1;
+  border: 0;
+  flex: 2;
+  text-align: left;
+  vertical-align: middle;
+}
+
+.CreatePost-button {
+  background-color: #26A69A;
+  border: 0;
+  color: white;
+  float: right;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+}
