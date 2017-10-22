@@ -2,6 +2,8 @@ package se.timewellspent
 
 import com.beust.klaxon.*
 import spark.*
+import spark.utils.IOUtils
+import java.io.File
 
 var storage = mutableMapOf<String, Models.Post>()
 
@@ -87,39 +89,58 @@ class Controllers {
         return "Hello from Spark Kotlin!"
     }
 
-    fun create(req: Request, res: Response): String {
+    fun createHelper(data: String): Models.Post {
         val id = "${counter++}"
+        val post = Models.Post.fromJsonString(id, data)
+        storage[post.id] = post
+        return post
+    }
+
+    fun create(req: Request, res: Response): String {
         var post: Models.Post
         try {
-            post = Models.Post.fromJsonString(id, req.body())
+            post = createHelper(req.body())
         } catch (e: Models.ParserException) {
             res.status(400)
             return ""
         }
-        storage[id] = post
         res.status(201)
         return post.toJsonString()
     }
 
     fun show(req: Request, res: Response): Any {
         val id = req.params("id")
-        return storage[id]?.let { post ->
+        storage[id]?.let { post ->
             res.status(200)
-            post.toJsonString()
-        } ?: res.status(404)
+            return post.toJsonString()
+        }
+
+        res.status(404)
+        return ""
     }
 }
 
-class Router {
+class Router(val controllers: Controllers = Controllers()) {
     init {
         Spark.staticFiles.location("/public")
-        val controllers = Controllers()
         Spark.get("/api/", controllers::root)
         Spark.post("/api/posts/", controllers::create)
         Spark.get("/api/posts/:id", controllers::show)
     }
 }
 
+
+class Server() {
+    val router = Router()
+
+    fun addFixtures() {
+        listOf("dog.json", "bumblebee.json", "puddle.json").forEach {
+            val data = IOUtils.toString(ClassLoader.getSystemClassLoader().getResourceAsStream(it))
+            router.controllers.createHelper(data)
+        }
+    }
+}
+
 fun main(args: Array<String>) {
-    Router()
+    Server().addFixtures()
 }
