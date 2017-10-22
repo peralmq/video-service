@@ -1,0 +1,6 @@
+version: '3'
+services:
+  video_service:
+    build: server
+    ports:
+     - "4567:4567"
