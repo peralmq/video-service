@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import {withRouter, Redirect} from 'react-router-dom'
+import ReactFilestack from 'filestack-react';
 
 import {
   clearCreatePost,
@@ -30,23 +31,17 @@ class CreatePost extends Component {
     this.props.onSubmit(this.state)
   }
 
-  handleFile(ev) {
-    const reader = new FileReader()
-    const file = ev.target.files[0]
-
-    reader.onload = (upload) => {
-      this.setState({
-        video: {
-          data: upload.target.result,
-          file: {
-            name: file.name,
-            type: file.type,
-          }
+  handleFile(result) {
+    const file = result.filesUploaded[0]
+    this.setState({
+      video: {
+        url: file.url,
+        file: {
+          name: file.filename,
+          type: file.mimetype,
         }
-      })
-    }
-
-    reader.readAsDataURL(file)
+      }
+    })
   }
 
   render() {
@@ -86,11 +81,16 @@ class CreatePost extends Component {
           </div>
           <div className="CreatePost-row">
             <label className="CreatePost-label" htmlFor="video">Video:</label>
-            <input
-              className="CreatePost-data"
-              id="video"
-              type="file"
-              onChange={this.handleFile}
+            <ReactFilestack
+              apikey={'AZ45hfpwETTj65u9skqdFz'}
+              options={{
+                accept: 'video/*',
+                fromSources: ['video'],
+                maxFiles: 1,
+              }}
+              buttonClass="CreatePost-data"
+              buttonText="Add video"
+              onSuccess={this.handleFile}
               />
           </div>
           <div className="CreatePost-row">

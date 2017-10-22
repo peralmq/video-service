@@ -26,7 +26,7 @@ class Video extends Component {
           controls={isPlaying ? 1 : 0}
           onEnded={() => this.setState({isPlaying: false})}
         >
-          <source src={video.data} type={video.file.type} />
+          <source src={video.url} type={video.file.type} />
           I'm sorry, your browser doesn't support HTML5 video.
         </video>
         {

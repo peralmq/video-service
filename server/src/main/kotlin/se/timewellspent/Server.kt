@@ -34,14 +34,14 @@ class Models {
 
         }
     }
-    data class Video(val data: String, val file: File) {
+    data class Video(val url: String, val file: File) {
         companion object {
             fun fromJsonString(j: JsonObject?): Video {
                 j?.let {
                     val file = File.fromJsonString(j.obj("file"))
-                    val data = j.string("data")
-                    if (!data.isNullOrEmpty()) {
-                        return Video(data!!, file)
+                    val url = j.string("url")
+                    if (!url.isNullOrEmpty()) {
+                        return Video(url!!, file)
                     }
                 }
 
@@ -51,7 +51,7 @@ class Models {
 
         fun toMap(): Map<String, *> {
             return mapOf(
-                    "data" to this.data,
+                    "url" to this.url,
                     "file" to this.file.toMap()
             )
 
@@ -145,7 +145,7 @@ class Server() {
     val router = Router()
 
     fun addFixtures() {
-        listOf("dog.json", "bumblebee.json", "puddle.json").forEach {
+        listOf("bumblebee.json", "puddle.json", "dog.json").forEach {
             val data = IOUtils.toString(ClassLoader.getSystemClassLoader().getResourceAsStream(it))
             router.controllers.createHelper(data)
         }

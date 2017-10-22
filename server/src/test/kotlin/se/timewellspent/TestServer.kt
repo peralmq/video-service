@@ -33,10 +33,10 @@ class TestServer {
                 "title" to "A title",
                 "description" to "A description",
                 "video" to obj(
-                        "data" to "Some data",
+                        "url" to "http://example.com/video.mp4",
                         "file" to obj(
                                 "name" to "A file name",
-                                "type" to "A file type"
+                                "type" to "video/mp4"
                         )
                 )
             )
@@ -60,10 +60,10 @@ class TestServer {
                     "title" to "A title",
                     "description" to "A description",
                     "video" to obj(
-                            "data" to "Some data",
+                            "url" to "http://example.com/video.mp4",
                             "file" to obj(
                                     "name" to "A file name",
-                                    "type" to "A file type"
+                                    "type" to "video/mp4"
                             )
                     )
             )
