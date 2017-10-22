@@ -1,0 +1,11 @@
+.CreatePostButton {
+  display: inline;
+  float: right;
+}
+
+.CreatePostButton-button {
+  height: 2.2857rem;
+  margin-right: 0.5714rem;
+  margin-top: 0.2857rem;
+  width: 2.2857rem;
+}
