@@ -2,6 +2,11 @@ import 'whatwg-fetch'
 export const CREATE_POST_REQUEST = 'CREATE_POST_REQUEST'
 export const CREATE_POST_SUCCESS = 'CREATE_POST_SUCCESS'
 export const CREATE_POST_FAIL = 'CREATE_POST_FAIL'
+export const CREATE_POST_CLEAR = 'CREATE_POST_CLEAR'
+
+export function clearCreatePost() {
+  return (dispatch) => dispatch({type: CREATE_POST_CLEAR})
+}
 
 export function createPost({title, description, video}) {
   return (dispatch) => {

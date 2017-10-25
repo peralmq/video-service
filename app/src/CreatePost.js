@@ -1,8 +1,11 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
-import {Redirect} from 'react-router-dom'
+import {withRouter, Redirect} from 'react-router-dom'
 
-import {createPost} from './actions'
+import {
+  clearCreatePost,
+  createPost
+} from './actions'
 
 import './CreatePost.css'
 
@@ -49,6 +52,7 @@ class CreatePost extends Component {
   render() {
     const {error, isLoading, didComplete} = this.props
     if (didComplete) {
+      this.props.onSuccess()
       return <Redirect to="/" />
     }
 
@@ -89,7 +93,14 @@ class CreatePost extends Component {
               onChange={this.handleFile}
               />
           </div>
-          <input className="CreatePost-button" type="submit" value="Create" />
+          <div className="CreatePost-row">
+            <input className="CreatePost-cancel-button" type="button" value="Cancel" onClick={(ev) => {
+              ev.preventDefault()
+              this.props.onSuccess()
+              this.props.history.push('/')
+          }}/>
+            <input className="CreatePost-button" type="submit" value="Create" />
+          </div>
         </form>
         {error && (
           <div className="CretePost-error">
@@ -107,8 +118,9 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
-    onSubmit: (data) => dispatch(createPost(data))
+    onSubmit: (data) => dispatch(createPost(data)),
+    onSuccess: () => dispatch(clearCreatePost()),
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(CreatePost)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(CreatePost))

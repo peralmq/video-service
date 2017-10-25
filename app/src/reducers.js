@@ -1,13 +1,17 @@
 import {combineReducers} from 'redux'
 
 import {
+  CREATE_POST_CLEAR,
   CREATE_POST_REQUEST,
   CREATE_POST_SUCCESS,
   CREATE_POST_FAIL,
 } from './actions'
 
-function createPost(state={isLoading: false, didComplete: false, error: null}, action) {
+const initialCreatePostState = {isLoading: false, didComplete: false, error: null}
+function createPost(state=initialCreatePostState, action) {
   switch (action.type) {
+    case CREATE_POST_CLEAR:
+      return initialCreatePostState
     case CREATE_POST_REQUEST:
       return {...state, isLoading: false, didComplete: false, error: null}
     case CREATE_POST_SUCCESS:

@@ -43,6 +43,24 @@
   vertical-align: middle;
 }
 
+.CreatePost-cancel-button {
+  background-color: white;
+  border: 0;
+  color: black;
+  flex: 1;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+}
+
+.CreatePost-button {
+  background-color: #26A69A;
+  border: 0;
+  color: white;
+  flex: 1;
+  font-size: 1.1rem;
+  padding: 0.4rem;
+}
+
 .CreatePost-button {
   background-color: #26A69A;
   border: 0;
