@@ -43,15 +43,15 @@ class TestServer {
     }.toJsonString()
 
     @Test
-    fun testCreateTrack() {
+    fun testCreatePost() {
         val (_, status, responseBody) = Fuel.post("$BASE_URL/posts/").body(createPostBody).responseString()
         assertEquals(201, status.statusCode)
         val id = (Parser().parse(responseBody.get().byteInputStream()) as JsonObject).string("id")
-        assertEquals("1", id)
+        assertNotNull(id)
     }
 
     @Test
-    fun testGetTrack() {
+    fun testGetPost() {
         val (_, _, responseBody) = Fuel.post("$BASE_URL/posts/").body(createPostBody).responseString()
         val id = (Parser().parse(responseBody.get().byteInputStream()) as JsonObject).string("id")
         val expected = json {
@@ -71,6 +71,16 @@ class TestServer {
         val (_, status, responseBody2) = Fuel.get("$BASE_URL/posts/" + id).responseString()
         assertEquals(200, status.statusCode)
         assertEquals(expected, responseBody2.get())
+    }
+
+    @Test
+    fun testGetPosts() {
+        val (_, status, responseBody) = Fuel.get("$BASE_URL/posts/").responseString()
+        assertEquals(200, status.statusCode)
+        val data = responseBody.get()
+        assertNotNull(data)
+        assertNotEquals(data , "[]")
+        assertTrue(data.startsWith("[{"))
     }
 }
 

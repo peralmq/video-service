@@ -73,13 +73,17 @@ class Models {
             }
         }
 
-        fun toJsonString(): String {
-            return JsonObject(mapOf(
+        fun toMap(): Map<String, Any> {
+           return mapOf(
                 "id" to this.id,
                 "title" to this.title,
                     "description" to this.description,
                     "video" to this.video.toMap()
-            )).toJsonString()
+            )
+        }
+
+        fun toJsonString(): String {
+            return JsonObject(toMap()).toJsonString()
         }
     }
 }
@@ -108,7 +112,13 @@ class Controllers {
         return post.toJsonString()
     }
 
-    fun show(req: Request, res: Response): Any {
+    fun index(req: Request, res: Response): String {
+        res.status(200)
+        val data = storage.values.map { it.toMap() }
+        return JsonArray(data).toJsonString()
+    }
+
+    fun show(req: Request, res: Response): String {
         val id = req.params("id")
         storage[id]?.let { post ->
             res.status(200)
@@ -125,6 +135,7 @@ class Router(val controllers: Controllers = Controllers()) {
         Spark.staticFiles.location("/public")
         Spark.get("/api/", controllers::root)
         Spark.post("/api/posts/", controllers::create)
+        Spark.get("/api/posts/", controllers::index)
         Spark.get("/api/posts/:id", controllers::show)
     }
 }
