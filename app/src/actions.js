@@ -61,3 +61,6 @@ export function fetchPosts() {
     })
   }
 }
+
+export const SEARCH_QUERY_CHANGED = 'SEARCH_QUERY_CHANGED'
+export const searchQueryChanged = (searchQuery) => ({type: SEARCH_QUERY_CHANGED, searchQuery})

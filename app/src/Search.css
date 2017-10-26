@@ -1,23 +1,25 @@
 .Search {
   position: relative;
-  width: 21.4285rem;
+  width: 19.4285rem;
 }
 
 .Search-button {
-  height: 2.2857rem;
+  height: 2rem;
   position: absolute;
   left: 0.5714rem;
   top: 0.2857rem;
-  width: 2.4285rem;
+  width: 2rem;
 }
 
 .Search-input {
   background-color: inherit;
   border: none;
-  border-bottom: 0.0714rem solid white;
+  border-bottom: 0.15rem solid white;
+  color: white;
+  height: 2.0571rem;
   float: left;
   margin-left: 0.5714rem;
   margin-top: 0.2857rem;
-  height: 2.0571rem;
+  padding-left: 3rem;
   width: inherit;
 }

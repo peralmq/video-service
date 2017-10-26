@@ -42,7 +42,7 @@ class Posts extends Component {
 function mapStateToProps(state) {
   const {posts} = state
   return {
-    visiblePosts: state.posts.data,
+    visiblePosts: state.posts.visibleData,
     posts,
   }
 }

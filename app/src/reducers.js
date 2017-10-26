@@ -7,7 +7,8 @@ import {
   CREATE_POST_FAIL,
   FETCH_POSTS_REQUEST,
   FETCH_POSTS_SUCCESS,
-  FETCH_POSTS_FAIL
+  FETCH_POSTS_FAIL,
+  SEARCH_QUERY_CHANGED,
 } from './actions'
 
 const initialCreatePostState = {isLoading: false, didComplete: false, error: null}
@@ -26,23 +27,45 @@ function createPost(state=initialCreatePostState, action) {
   }
 }
 
-function posts(state={isLoading: false, error: null, data: []}, action) {
+const initialPostsState = {
+  isLoading: false,
+  error: null,
+  data: [],
+  visibleData: [],
+  searchQuery: null
+}
+function visiblePostsData(data, searchQuery) {
+  if (!searchQuery) {
+    return data
+  }
+  return data.filter(({description}) => description.indexOf(searchQuery) !== -1)
+}
+function posts(state=initialPostsState, action) {
   switch (action.type) {
     case FETCH_POSTS_REQUEST:
       return {...state, isLoading: true, error: null}
     case FETCH_POSTS_SUCCESS:
-      return {...state, isLoading: false, error: null, data: action.data}
+      return {
+        ...state,
+        isLoading: false,
+        error: null,
+        data: action.data,
+        visibleData: visiblePostsData(action.data, state.searchQuery)
+      }
     case FETCH_POSTS_FAIL:
       return {...state, isLoading: false, error: action.error}
     case CREATE_POST_SUCCESS:
-      return {...state, data: action.data.concat(state.data)}
-    default:
-      return state
-  }
-}
-
-function visiblePosts(state=[], action) {
-  switch (action) {
+      return {
+        ...state,
+        data: action.data.concat(state.data),
+        visibleData: visiblePostsData(action.data.concat(state.data), state.searchQuery)
+      }
+    case SEARCH_QUERY_CHANGED:
+      return {
+        ...state,
+        searchQuery: action.searchQuery,
+        visibleData: visiblePostsData(state.data, action.searchQuery)
+      }
     default:
       return state
   }
@@ -51,7 +74,6 @@ function visiblePosts(state=[], action) {
 const reducers = combineReducers({
   createPost,
   posts,
-  visiblePosts
 })
 
 export default reducers
